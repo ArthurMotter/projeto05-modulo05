@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Agenda</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Cadastros
+          </a>
+          <ul class="dropdown-menu">
+            <ng-container *ngFor="let link of cadastroLinks">
+              <li *ngIf="link.divider">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="!link.divider">
+                <a class="dropdown-item" [routerLink]="link.path">{{ link.label }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Agendamentos
+          </a>
+          <ul class="dropdown-menu">
+            <ng-container *ngFor="let link of agendamentoLinks">
+              <li *ngIf="link.divider">
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="!link.divider">
+                <a class="dropdown-item" [routerLink]="link.path">{{ link.label }}</a>
+              </li>
+            </ng-container>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center">
+        <div class="navbar-text me-3">
+          <span class="fw-bold">{{getUserName()}}</span>
+          <span *ngIf="isAdmin()"> (admin)</span>
+        </div>
+        <button class="btn btn-outline-secondary" type="button" (click)="logout()">Sair</button>
+      </div>
+
+    </div>
+  </div>
+</nav>

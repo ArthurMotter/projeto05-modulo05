@@ -1,0 +1,7 @@
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <app-toast
+    *ngFor="let toast of toasts$ | async"
+    [toastInfo]="toast"
+    (onClose)="removeToast(toast)"
+  ></app-toast>
+</div>

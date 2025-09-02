@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+    <!-- Name -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+            [class.is-invalid]="name?.invalid && (name?.dirty || name?.touched)">
+        <!-- Error Messages -->
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="invalid-feedback">
+            <div *ngIf="name?.errors?.['required']">Nome é obrigatório.</div>
+            <div *ngIf="name?.errors?.['minlength']">Nome deve ter no mínimo 3 caracteres.</div>
+            <div *ngIf="name?.errors?.['maxlength']">Nome não pode exceder 150 caracteres.</div>
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email"
+            [class.is-invalid]="email?.invalid && (email?.dirty || email?.touched)">
+        <!-- Error Messages -->
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+            <div *ngIf="email?.errors?.['email']">Por favor, insira um email válido.</div>
+        </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="mb-3">
+        <label for="phone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="phone" formControlName="phone" mask="(00) 00000-0000">
+    </div>
+
+    <!-- Areas -->
+    <div class="mb-3">
+        <label for="areaIds" class="form-label">Áreas de Atuação</label>
+        <select id="areaIds" class="form-select" multiple formControlName="areaIds"
+            [class.is-invalid]="areaIds?.invalid && (areaIds?.dirty || areaIds?.touched)">
+            <option *ngFor="let area of areas$ | async" [value]="area.id">{{ area.name }}</option>
+        </select>
+        <!-- Error Messages -->
+        <div *ngIf="areaIds?.invalid && (areaIds?.dirty || areaIds?.touched)" class="invalid-feedback">
+            <div *ngIf="areaIds?.errors?.['required']">Selecione pelo menos uma área.</div>
+        </div>
+    </div>
+
+    <!-- Active -->
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="active" formControlName="active">
+        <label class="form-check-label" for="active">Ativo</label>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Salvar</button>
+    </div>
+</form>

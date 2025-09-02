@@ -1,0 +1,19 @@
+<div class="text-center">
+  Horários Disponíveis:
+  <div class="row" *ngFor="let row of [0,1]">
+    <div class="col time time-off" *ngFor="let time of times.slice(row*8, (row+1)*8)"
+       [ngClass]="{
+          'time-off'          : !time.available,
+          'time-available'    : time.available,
+          'time-selected'     : time.startTime === selectedTime.startTime ,
+        }"
+        (click)="time.available && onSelectTime(time)"
+      >
+
+        {{time.startTime | time}}
+    </div>
+  </div>
+  <div *ngIf="error" class="text-start">
+    <small class="form-text text-danger">{{error}}</small>
+  </div>
+</div>
