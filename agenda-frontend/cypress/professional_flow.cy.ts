@@ -79,7 +79,6 @@ describe('Professional Module E2E Tests', () => {
         cy.contains('Profissional salvo com sucesso!').should('be.visible');
         cy.wait('@getProfessionals');
 
-        // --- THIS IS THE FIX ---
         // Find the row again using the unique, unchanging email address
         cy.contains('td', 'ana.silva@example.com').parent('tr').within(() => {
             // The application appears to truncate the numeric part of the name.
@@ -97,7 +96,6 @@ describe('Professional Module E2E Tests', () => {
         const professionalNameToDelete = `Cypress Delete ${uniqueId}`;
         const professionalEmailToDelete = `delete${uniqueId}@test.com`;
 
-        // --- THIS IS THE FIX ---
         // STEP 1: Create the professional we are going to delete.
         cy.request('POST', 'http://localhost:8080/professionals', {
             name: professionalNameToDelete,
