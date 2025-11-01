@@ -33,6 +33,13 @@ public class ProfessionalService {
         this.areaRepository = areaRepository;
     }
 
+    // GET BY {areaId}
+    @Transactional(readOnly = true)
+    public Page<ProfessionalResponseDTO> findByAreaId(Integer areaId, Pageable pageable) {
+        Page<Professional> professionalsPage = professionalRepository.findByAreas_IdAndActiveTrue(areaId, pageable);
+        return professionalsPage.map(ProfessionalMapper::toProfessionalResponseDTO);
+    }
+
     // GET BY {name}
     @Transactional(readOnly = true)
     public Page<ProfessionalResponseDTO> getAll(String name, Pageable pageable) {

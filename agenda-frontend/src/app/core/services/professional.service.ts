@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Professional } from '../models/professional.model';
 import { Time } from '../../modules/schedule/components/time/models/time';
 import { environment } from '../../../environments/environment.development';
@@ -59,10 +59,34 @@ export class ProfessionalService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
+  getProfessionalsByArea(areaId: number): Observable<Professional[]> {
+    const url = `${environment.baseUrl}/areas/${areaId}/professionals`; 
+    
+    return this.http.get<Page<Professional>>(url).pipe(
+      map(page => page.content) 
+    );
+  }
+
+  // In professional.service.ts
+
   getAvailableDays(professional: Professional, calendar: Date): Observable<number[]> {
-    const month = calendar.getMonth() + 1;
+
+    // 1. Get the year and month from the calendar date
     const year = calendar.getFullYear();
-    const url = `${this.baseUrl}/${professional.id}/availability-days?year=${year}&month=${month}`;
+    const month = calendar.getMonth();
+
+    // 2. Calculate the first day of the month
+    const firstDay = new Date(year, month, 1);
+    
+    // 3. Calculate the last day of the month
+    const lastDay = new Date(year, month + 1, 0);
+
+    // 4. Format the dates into 'YYYY-MM-DD' strings, which the backend expects
+    const start = this.datePipe.transform(firstDay, 'yyyy-MM-dd');
+    const end = this.datePipe.transform(lastDay, 'yyyy-MM-dd');
+
+    // 5. Build the new URL with the correct 'start' and 'end' parameters
+    const url = `${this.baseUrl}/${professional.id}/availability-days?start=${start}&end=${end}`;
 
     return this.http.get<number[]>(url);
   }

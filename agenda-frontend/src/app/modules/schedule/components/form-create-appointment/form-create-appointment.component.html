@@ -32,8 +32,10 @@
   <div class="mb-3">
       Crie ou digite o nome do cliente:
       <div class="input-group">
-        <input id="typeahead-basic" type="text" class="form-control" formControlName="client" />
-        <!-- [ngbTypeahead]="searchClients" [resultFormatter]="formatter" [inputFormatter]="formatter" -->
+        <input id="typeahead-basic" type="text" class="form-control" formControlName="client" 
+       [ngbTypeahead]="searchClients" 
+       [resultFormatter]="formatter" 
+       [inputFormatter]="formatter" />
       </div>
       <div *ngIf="getSelectedClient()" class="text-start">
           <small>Confirme o telefone do cliente: {{getSelectedClient().phone}}</small>

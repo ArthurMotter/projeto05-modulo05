@@ -32,4 +32,7 @@ public class Client {
     @Column(columnDefinition = "TEXT")
     private String comments;
 
+    public Client(Integer id) {
+        this.id = id;
+    }
 }

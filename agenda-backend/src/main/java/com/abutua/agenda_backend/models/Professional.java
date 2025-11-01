@@ -34,11 +34,11 @@ public class Professional {
     private boolean active = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "professional_areas",
-        joinColumns = @JoinColumn(name = "professional_id"),
-        inverseJoinColumns = @JoinColumn(name = "area_id")
-    )
+    @JoinTable(name = "professional_areas", joinColumns = @JoinColumn(name = "professional_id"), inverseJoinColumns = @JoinColumn(name = "area_id"))
     private Set<Area> areas = new HashSet<>();
+
+    public Professional(Integer id) {
+        this.id = id;
+    }
 
 }

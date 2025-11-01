@@ -24,4 +24,7 @@ public class Area {
     @Column(nullable = false, unique = true, length = 100)
     private String name;
 
+    public Area(Integer id) {
+        this.id = id;
+    }
 }

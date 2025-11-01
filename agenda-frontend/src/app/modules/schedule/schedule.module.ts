@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
-
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScheduleRoutingModule } from './schedule-routing.module';
 import { TodayAppointmentsPageComponent } from './pages/today-appointments-page/today-appointments-page.component';
 import { CreateAppointmentPageComponent } from './pages/create-appointment-page/create-appointment-page.component';
@@ -28,7 +28,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     ScheduleRoutingModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule, 
+    NgbTypeaheadModule
   ],
   providers: [
     JsonPipe,

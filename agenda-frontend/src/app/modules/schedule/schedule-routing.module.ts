@@ -6,7 +6,7 @@ import { CancelAppointmentPageComponent } from './pages/cancel-appointment-page/
 import { ClientHistoryPageComponent } from './pages/client-history-page/client-history-page.component';
 import { ProfessionalWorkdaysPageComponent } from './pages/professional-workdays-page/professional-workdays-page.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: 'hoje', component: TodayAppointmentsPageComponent},
   {path: 'agendar', component: CreateAppointmentPageComponent},
   {path: 'cancelar', component: CancelAppointmentPageComponent},
