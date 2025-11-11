@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -96,7 +97,7 @@ public class ProfessionalControllerTest {
     }
 
     @Test
-    void createProfessional_shouldReturn400BadRequest_whenNameIsBlank() throws Exception {
+    void createProfessional_shouldReturn422UnprocessableEntity_whenNameIsBlank() throws Exception {
         ProfessionalRequestDTO requestDTO = new ProfessionalRequestDTO(
                 "",
                 "invalid@example.com",
@@ -109,7 +110,7 @@ public class ProfessionalControllerTest {
         mockMvc.perform(post("/professionals")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonRequest))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test

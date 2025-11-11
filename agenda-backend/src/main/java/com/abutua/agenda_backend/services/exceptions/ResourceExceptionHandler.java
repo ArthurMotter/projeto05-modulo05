@@ -32,6 +32,19 @@ public class ResourceExceptionHandler {
     }
 
     // Manipula quando um recurso não é encontrado
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND; // 404 Not Found
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Resource not found");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    // Manipula quando uma entidade não é encontrada
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND; // 404 Not Found
