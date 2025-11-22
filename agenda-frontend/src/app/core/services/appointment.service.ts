@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Appointment } from '../models/appointment.models';
+import { Appointment, AppointmentRequest } from '../models/appointment.models';
 import { AppointmentType } from '../models/appointment.models';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -16,8 +16,9 @@ export class AppointmentService {
 
   constructor(private http: HttpClient) { }
 
-  save(appointment: Appointment): Observable<Appointment>{
-    return this.http.post<Appointment>(this.appointmentUrl,appointment);
+  save(appointment: AppointmentRequest): Observable<Appointment> {
+    const url = `${this.baseUrl}/appointments`;
+    return this.http.post<Appointment>(url, appointment);
   }
 
   getAppointmentTypes(): Observable<AppointmentType[]> {

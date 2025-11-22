@@ -27,5 +27,4 @@ declare global {
   }
 }
 
-// THIS IS THE FIX: This line makes TypeScript treat this file as a module.
 export {};
